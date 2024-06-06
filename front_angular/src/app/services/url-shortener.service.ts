@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UrlShortener } from '../interfaces/url-shortener.interface';
 import { env } from '../environment/env';
 import { Injectable } from '@angular/core';
+import { UrlShortener } from '../interfaces/url-Shortener.interface';
 
 @Injectable()
 export class UrlShortenedService {

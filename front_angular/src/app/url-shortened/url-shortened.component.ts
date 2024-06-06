@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UrlShortenedService } from '../services/url-shortener.service';
 import { CommonModule } from '@angular/common';
-import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { env } from '../environment/env';
 
 @Component({
   selector: 'app-url-shortened',
@@ -12,7 +13,16 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
   styleUrl: './url-shortened.component.scss',
 })
 export class UrlShortenedComponent {
-  allUrlsS = this.urlShortenerService.getAllUrls();
+  env = env;
+
+  @Input() name: string = '';
+  @Output() nameChange: EventEmitter<string> = new EventEmitter<string>();
+
+  allUrls$ = this.urlShortenerService.getAllUrls();
 
   constructor(private readonly urlShortenerService: UrlShortenedService) {}
+
+  sendMessage() {
+    this.nameChange.emit('Bien reçu !');
+  }
 }

@@ -1,3 +1,8 @@
-<p *ngFor="let url of allUrlsS | async">
-  {{ url.originalUrl }} - {{ url.shortUrl }}
+<p>Salut {{ name }} !</p>
+<button (click)="sendMessage()">Envoyer</button>
+<p *ngFor="let url of allUrls$ | async">
+  {{ url.originalUrl }} -
+  <a [href]="env.baseApiUrl + '/' + url.shortUrl" target="_blank"
+    >{{ env.baseApiUrl }}/{{ url.shortUrl }}</a
+  >
 </p>

@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { UrlService } from 'src/services/url.service';
 
 @Controller()
@@ -8,6 +9,17 @@ export class UrlController {
   @Get()
   getAll() {
     return this.urlService.getAllUrls();
+  }
+
+  @Get(':shortUrl')
+  async getRedirectUrl(@Param('shortUrl') shortUrl: string, @Res() res: Response) {
+    const urlFound = await this.urlService.getUrl(shortUrl);
+    if (urlFound) {
+      res.redirect(urlFound.originalUrl);
+    }
+    res.status(404).json({
+      message: 'Url courte introuvable !',
+    });
   }
 
   @Post()

@@ -1,12 +1,15 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 export class Message {
-  @Prop({ required: true })
+  @Prop()
+  sender: string;
+
+  @Prop()
   content: string;
 
   @Prop()
-  date: string;
+  timestamp: Date;
 }
 
-export const UrlShortener = SchemaFactory.createForClass(Message);
+export const MessageSchema = SchemaFactory.createForClass(Message);

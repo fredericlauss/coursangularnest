@@ -11,4 +11,10 @@ export class UrlShortenedService {
   getAllUrls(): Observable<UrlShortener[]> {
     return this.httpclient.get<UrlShortener[]>(env.baseApiUrl);
   }
+
+  createShortUrl(url: string): Observable<UrlShortener> {
+    return this.httpclient.post<UrlShortener>(env.baseApiUrl, {
+      originalUrl: url,
+    });
+  }
 }
